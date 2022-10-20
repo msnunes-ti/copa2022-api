@@ -7,4 +7,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface SelecaoRepository extends JpaRepository<Selecao, Long> {
 
+    Selecao findByRanking (Long posicaoNoRanking);
+
 }

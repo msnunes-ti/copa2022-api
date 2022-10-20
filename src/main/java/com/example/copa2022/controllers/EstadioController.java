@@ -3,6 +3,7 @@ package com.example.copa2022.controllers;
 import com.example.copa2022.dtos.AtualizaEstadioDTO;
 import com.example.copa2022.dtos.CadastraEstadioDTO;
 import com.example.copa2022.models.Estadio;
+import com.example.copa2022.models.Selecao;
 import com.example.copa2022.services.EstadioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

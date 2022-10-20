@@ -18,6 +18,10 @@ public class SelecaoService {
 
     SelecaoRepository selecaoRepository;
 
+    public Selecao buscarPeloRanking(Long posicaoNoRanking) {
+        return selecaoRepository.findByRanking(posicaoNoRanking);
+    }
+
     public Selecao buscaPorId(Long id) {
         return selecaoRepository.findById(id).orElseThrow(() -> new RuntimeException("Seleção não encontrada pelo ID"));
     }
@@ -30,11 +34,16 @@ public class SelecaoService {
         Selecao selecao = SelecaoMapper.toCadastraSelecao(cadastraSelecaoDTO);
         selecaoRepository.save(selecao);
     }
-
+    @Transactional
     public void atualizaSelecao(Long id, AtualizaSelecaoDTO atualizaSelecaoDTO) {
         Selecao selecaoEncontrada = buscaPorId(id);
         Selecao selecao = SelecaoMapper.toAtualizaSelecao(atualizaSelecaoDTO);
         selecao.setId(selecaoEncontrada.getId());
         selecaoRepository.save(selecao);
+    }
+
+    public void deletaSelecao(Long id) {
+        Selecao selecao = buscaPorId(id);
+        selecaoRepository.delete(selecao);
     }
 }
