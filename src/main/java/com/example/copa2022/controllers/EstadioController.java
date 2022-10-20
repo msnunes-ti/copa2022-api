@@ -20,14 +20,22 @@ public class EstadioController {
     public List<Estadio> buscaEstadios() {
         return estadioService.findAll();
     }
+    @GetMapping(path = "/{id}")
+    public Estadio buscaPorId(@PathVariable Long id){
+        return estadioService.buscaPorId(id);
+    }
 
     @PostMapping
     public @ResponseBody void cadastraEstadio(@RequestBody CadastraEstadioDTO cadastraEstadioDTO) {
         estadioService.cadastraEstadio(cadastraEstadioDTO);
     }
 
-    @PutMapping
-    public void atualizaEstadio(Long id, AtualizaEstadioDTO atualizaEstadioDTO) {
+    @PutMapping(path = "/{id}")
+    public @ResponseBody void atualizaEstadio(@PathVariable Long id, @RequestBody AtualizaEstadioDTO atualizaEstadioDTO) {
         estadioService.atualizaEstadio(id, atualizaEstadioDTO);
+    }
+    @DeleteMapping(path = "/{id}")
+    public void deletaPorId(@PathVariable Long id) {
+        estadioService.deletaEstadio(id);
     }
 }

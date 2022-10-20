@@ -24,6 +24,10 @@ public class EstadioService {
         return estadioRepository.findAll();
     }
 
+    public Estadio buscaPorId(Long id) {
+        return estadioRepository.findById(id).orElseThrow(() -> new RuntimeException("Estádio não encontrado pelo ID"));
+    }
+
     @Transactional
     public void cadastraEstadio(CadastraEstadioDTO cadastraEstadioDTO){
         Long estadios = estadioRepository.countByNomeEstadio(cadastraEstadioDTO.getNomeEstadio());
@@ -33,12 +37,17 @@ public class EstadioService {
         Estadio estadio = EstadioMapper.toCadastraEstadio(cadastraEstadioDTO);
         estadioRepository.save(estadio);
     }
-
+    @Transactional
     public void atualizaEstadio(Long id, AtualizaEstadioDTO atualizaEstadioDTO) {
         Optional<Estadio> estadioSalvo = Optional.ofNullable(estadioRepository.findById(id).orElseThrow(() -> new RuntimeException("Estádio não encontrado pelo ID")));
         Estadio estadio = EstadioMapper.toAtualizaCadastro(atualizaEstadioDTO);
         estadio.setId(estadioSalvo.get().getId());
         estadioRepository.save(estadio);
+    }
+
+    public void deletaEstadio(Long id) {
+        Estadio estadio = buscaPorId(id);
+        estadioRepository.delete(estadio);
     }
 
 }
