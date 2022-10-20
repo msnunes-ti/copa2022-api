@@ -1,5 +1,6 @@
 package com.example.copa2022.controllers;
 
+import com.example.copa2022.dtos.AtualizaEstadioDTO;
 import com.example.copa2022.dtos.CadastraEstadioDTO;
 import com.example.copa2022.models.Estadio;
 import com.example.copa2022.services.EstadioService;
@@ -25,4 +26,8 @@ public class EstadioController {
         estadioService.cadastraEstadio(cadastraEstadioDTO);
     }
 
+    @PutMapping
+    public void atualizaEstadio(Long id, AtualizaEstadioDTO atualizaEstadioDTO) {
+        estadioService.atualizaEstadio(id, atualizaEstadioDTO);
+    }
 }

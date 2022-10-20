@@ -9,4 +9,6 @@ public interface EstadioRepository extends JpaRepository<Estadio, Long> {
 
     Long countByNomeEstadio(String nome);
 
+
+
 }
