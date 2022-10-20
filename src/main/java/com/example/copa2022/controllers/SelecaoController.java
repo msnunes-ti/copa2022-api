@@ -24,7 +24,7 @@ public class SelecaoController {
         return selecaoService.buscaTodos();
     }
     @PostMapping
-    public void cadastraSelecao(CadastraSelecaoDTO cadastraSelecaoDTO) {
+    public @ResponseBody void cadastraSelecao(@RequestBody CadastraSelecaoDTO cadastraSelecaoDTO) {
         selecaoService.cadastraSelecao(cadastraSelecaoDTO);
     }
 }

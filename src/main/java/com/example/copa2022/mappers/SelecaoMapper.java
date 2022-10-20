@@ -1,5 +1,6 @@
 package com.example.copa2022.mappers;
 
+import com.example.copa2022.dtos.AtualizaSelecaoDTO;
 import com.example.copa2022.dtos.CadastraSelecaoDTO;
 import com.example.copa2022.models.Selecao;
 
@@ -11,6 +12,15 @@ public class SelecaoMapper {
         selecao.setPaisOrigem(cadastraSelecaoDTO.getPaisOrigem());
         selecao.setCorDoUniforme(cadastraSelecaoDTO.getCorDoUniforme());
         selecao.setRanking(cadastraSelecaoDTO.getRanking());
+        return selecao;
+    }
+
+    public static Selecao toAtualizaSelecao(AtualizaSelecaoDTO atualizaSelecaoDTO) {
+        Selecao selecao = new Selecao();
+        selecao.setNomeSelecao(atualizaSelecaoDTO.getNomeSelecao());
+        selecao.setPaisOrigem(atualizaSelecaoDTO.getPaisOrigem());
+        selecao.setCorDoUniforme(atualizaSelecaoDTO.getCorDoUniforme());
+        selecao.setRanking(atualizaSelecaoDTO.getRanking());
         return selecao;
     }
 }

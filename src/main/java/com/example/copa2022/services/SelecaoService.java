@@ -1,5 +1,6 @@
 package com.example.copa2022.services;
 
+import com.example.copa2022.dtos.AtualizaSelecaoDTO;
 import com.example.copa2022.dtos.CadastraSelecaoDTO;
 import com.example.copa2022.mappers.SelecaoMapper;
 import com.example.copa2022.models.Selecao;
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @AllArgsConstructor
@@ -27,6 +29,12 @@ public class SelecaoService {
     public void cadastraSelecao(CadastraSelecaoDTO cadastraSelecaoDTO){
         Selecao selecao = SelecaoMapper.toCadastraSelecao(cadastraSelecaoDTO);
         selecaoRepository.save(selecao);
+    }
 
+    public void atualizaSelecao(Long id, AtualizaSelecaoDTO atualizaSelecaoDTO) {
+        Selecao selecaoEncontrada = buscaPorId(id);
+        Selecao selecao = SelecaoMapper.toAtualizaSelecao(atualizaSelecaoDTO);
+        selecao.setId(selecaoEncontrada.getId());
+        selecaoRepository.save(selecao);
     }
 }
