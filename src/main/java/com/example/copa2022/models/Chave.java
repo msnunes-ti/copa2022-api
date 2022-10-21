@@ -1,17 +1,16 @@
 package com.example.copa2022.models;
 
 import com.sun.istack.NotNull;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 @Getter
 @Setter
+@Table(name = "chaves")
 public class Chave {
 
     @Id
@@ -22,16 +21,20 @@ public class Chave {
     private String grupo;
 
     @NotNull
-    private Selecao selecao1;
+    @OneToOne
+    private Selecao selecaoUm;
 
     @NotNull
-    private Selecao selecao2;
+    @OneToOne
+    private Selecao selecaoDois;
 
     @NotNull
-    private Selecao selecao3;
+    @OneToOne
+    private Selecao selecaoTres;
 
     @NotNull
-    private Selecao selecao4;
+    @OneToOne
+    private Selecao selecaoQuatro;
 
     @NotNull
     private Integer quantidadeGrupos;
