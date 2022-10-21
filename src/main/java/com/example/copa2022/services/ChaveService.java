@@ -60,5 +60,10 @@ public class ChaveService {
     public List<Chave> buscarTodasChaves() {
         return chaveRepository.findAll();
     }
+
+    public void deletarChave(Long id) {
+        Chave chave = buscarChave(id);
+        chaveRepository.delete(chave);
+    }
 }
 

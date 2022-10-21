@@ -12,6 +12,7 @@ public class SelecaoMapper {
         selecao.setPaisOrigem(cadastraSelecaoDTO.getPaisOrigem());
         selecao.setCorDoUniforme(cadastraSelecaoDTO.getCorDoUniforme());
         selecao.setRanking(cadastraSelecaoDTO.getRanking());
+        selecao.setPontos(0);
         return selecao;
     }
 
@@ -21,6 +22,7 @@ public class SelecaoMapper {
         selecao.setPaisOrigem(atualizaSelecaoDTO.getPaisOrigem());
         selecao.setCorDoUniforme(atualizaSelecaoDTO.getCorDoUniforme());
         selecao.setRanking(atualizaSelecaoDTO.getRanking());
+        selecao.setPontos(atualizaSelecaoDTO.getPontos());
         return selecao;
     }
 }

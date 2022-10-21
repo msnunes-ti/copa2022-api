@@ -19,4 +19,7 @@ public class AtualizaSelecaoDTO {
 
     @NotNull
     private Long ranking;
+
+    @NotNull
+    private Integer pontos;
 }

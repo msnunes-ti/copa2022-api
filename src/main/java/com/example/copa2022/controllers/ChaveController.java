@@ -28,4 +28,9 @@ public class ChaveController {
     public List<Chave> gerarListaDeChaves() {
         return chaveService.gerarListaDeChaves();
     }
+
+    @DeleteMapping(path = "/{id}")
+    public void deletarChave(@PathVariable Long id) {
+        chaveService.deletarChave(id);
+    }
 }

@@ -31,6 +31,9 @@ public class Selecao {
     @NotNull
     @Column(unique = true)
     private Long ranking;
+
+    @Column(name = "pontos")
+    private Integer pontos;
 }
 
 
