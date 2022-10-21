@@ -19,7 +19,7 @@ public class Chave {
     private Long id;
 
     @NotNull
-    private String letraDoGrupo;
+    private String grupo;
 
     @NotNull
     private Selecao selecao1;
