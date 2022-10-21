@@ -1,5 +1,6 @@
 package com.example.copa2022.controllers;
 
+import com.example.copa2022.models.Chave;
 import com.example.copa2022.models.Selecao;
 import com.example.copa2022.services.ChaveService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +18,7 @@ public class ChaveController {
     ChaveService chaveService;
 
     @GetMapping
-    public List<Selecao> selecoesOrdenadas() {
+    public List<Chave> selecoesOrdenadas() {
         return chaveService.gerarListaDeChaves();
     }
 }
