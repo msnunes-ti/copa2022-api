@@ -47,10 +47,18 @@ public class ChaveService {
             chaves.get(i).setSelecaoQuatro(selecoesOrdenadas.get(contador));
             contador++;
         }
-        for (int i = 0; i < chaves.size(); i++) {
-            chaveRepository.save(chaves.get(i));
-        }
+//        for (int i = 0; i < chaves.size(); i++) {
+//            chaveRepository.save(chaves.get(i));
+//        }
         return chaves;
+    }
+
+    public Chave buscarChave(Long id) {
+        return chaveRepository.findById(id).orElseThrow(() -> new RuntimeException("Chave não encontrada pelo ID."));
+    }
+
+    public List<Chave> buscarTodasChaves() {
+        return chaveRepository.findAll();
     }
 }
 
