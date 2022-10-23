@@ -32,20 +32,24 @@ public class ChaveService {
             Chave chave = new Chave();
             chave.setGrupo(letras.get(i));
             chave.setQuantidadeGrupos(quantidadeChaves);
-            chave.setSelecaoUm(selecoesOrdenadas.get(i));
+            List<Selecao> selecoes = new ArrayList<>();
+            selecoes.add(selecoesOrdenadas.get(i));
+            chave.setSelecoes(selecoes);
             chaves.add(chave);
         }
         if (quantidadeChaves > 0) {
             selecoesOrdenadas.subList(0, quantidadeChaves).clear();
         }
         Collections.shuffle(selecoesOrdenadas);
-        for(int i = 0, contador = 0; i < quantidadeChaves; i++) {
-            chaves.get(i).setSelecaoDois(selecoesOrdenadas.get(contador));
-            contador++;
-            chaves.get(i).setSelecaoTres(selecoesOrdenadas.get(contador));
-            contador++;
-            chaves.get(i).setSelecaoQuatro(selecoesOrdenadas.get(contador));
-            contador++;
+        for(int i = 0, j = 0; i < quantidadeChaves; i++) {
+            List<Selecao> selecoes = chaves.get(i).getSelecoes();
+            selecoes.add(selecoesOrdenadas.get(j));
+            j++;
+            selecoes.add(selecoesOrdenadas.get(j));
+            j++;
+            selecoes.add(selecoesOrdenadas.get(j));
+            j++;
+            chaves.get(i).setSelecoes(selecoes);
         }
 //        for (int i = 0; i < chaves.size(); i++) {
 //            chaveRepository.save(chaves.get(i));

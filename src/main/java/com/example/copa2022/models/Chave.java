@@ -21,9 +21,8 @@ public class Chave {
     private String grupo;
 
     @NotNull
-    @OneToOne
+    @OneToMany
     private List<Selecao> selecoes;
-
 
     @NotNull
     private Integer quantidadeGrupos;
