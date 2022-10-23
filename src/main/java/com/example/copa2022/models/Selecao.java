@@ -10,7 +10,7 @@ import javax.persistence.*;
 @Getter
 @Setter
 @Table(name = "selecao")
-public class Selecao {
+public class Selecao implements Comparable<Selecao> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -34,6 +34,16 @@ public class Selecao {
 
     @Column(name = "pontos")
     private Integer pontos;
+
+    @Override
+    public int compareTo(Selecao outraSelecao) {
+        if (this.pontos > outraSelecao.getPontos()) {
+            return -1;
+        } if (this.pontos < outraSelecao.getPontos()) {
+            return 1;
+        }
+        return 0;
+    }
 }
 
 

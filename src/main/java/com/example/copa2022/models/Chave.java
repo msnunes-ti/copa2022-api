@@ -1,11 +1,11 @@
 package com.example.copa2022.models;
 
 import com.sun.istack.NotNull;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Getter
@@ -22,19 +22,8 @@ public class Chave {
 
     @NotNull
     @OneToOne
-    private Selecao selecaoUm;
+    private List<Selecao> selecoes;
 
-    @NotNull
-    @OneToOne
-    private Selecao selecaoDois;
-
-    @NotNull
-    @OneToOne
-    private Selecao selecaoTres;
-
-    @NotNull
-    @OneToOne
-    private Selecao selecaoQuatro;
 
     @NotNull
     private Integer quantidadeGrupos;
