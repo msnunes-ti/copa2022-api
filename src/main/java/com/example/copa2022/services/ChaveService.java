@@ -19,6 +19,7 @@ public class ChaveService {
     @Autowired
     SelecaoRepository selecaoRepository;
 
+
     public List<Chave> gerarListaDeChaves() {
         List<Selecao> selecoesOrdenadas = selecaoRepository.findAllByOrderByRankingAsc();
         if((selecoesOrdenadas.size() % 4 != 0)) {
@@ -27,7 +28,6 @@ public class ChaveService {
         int quantidadeChaves = selecoesOrdenadas.size() / 4;
         List<String> letras = Arrays.asList("A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z");
         List<Chave> chaves = new ArrayList<>();
-
         for(int i = 0; i < quantidadeChaves; i++) {
             Chave chave = new Chave();
             chave.setGrupo(letras.get(i));
@@ -58,7 +58,11 @@ public class ChaveService {
     }
 
     public Chave buscarChave(Long id) {
-        return chaveRepository.findById(id).orElseThrow(() -> new RuntimeException("Chave não encontrada pelo ID."));
+        Chave chave = chaveRepository.findById(id).orElseThrow(() -> new RuntimeException("Chave não encontrada pelo ID."));
+        List<Selecao> selecoes = chave.getSelecoes();
+        Collections.sort(selecoes);
+        chave.setSelecoes(selecoes);
+        return chave;
     }
 
     public List<Chave> buscarTodasChaves() {
