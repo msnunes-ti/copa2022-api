@@ -19,23 +19,19 @@ public class Jogo {
     @NotNull
     private String chave;
 
-    @NotNull
     @ManyToOne
     @JoinColumn(name = "Selecao_mandante_id")
     private Selecao selecaoMandante;
 
-    @NotNull
     @ManyToOne
     @JoinColumn(name = "selecao_visitante_id")
     private Selecao selecaoVisitante;
 
-    @NotNull
-    private LocalDateTime dataHora;
-
-    @NotNull
     @ManyToOne
     @JoinColumn(name = "estadio_id")
     private Estadio estadio;
+
+    private LocalDateTime dataHora;
 
     private Integer golsMandante;
 
