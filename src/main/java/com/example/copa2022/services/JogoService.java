@@ -3,6 +3,7 @@ package com.example.copa2022.services;
 import com.example.copa2022.models.Chave;
 import com.example.copa2022.models.Estadio;
 import com.example.copa2022.models.Jogo;
+import com.example.copa2022.models.Selecao;
 import com.example.copa2022.repositories.ChaveRepository;
 import com.example.copa2022.repositories.EstadioRepository;
 import com.example.copa2022.repositories.JogoRepository;
@@ -47,9 +48,9 @@ public class JogoService {
                 jogos.add(jogo);
             }
         }
-//        for (Jogo jogo : jogos) {
-//            jogoRepository.save(jogo);
-//        }
+        for (Jogo jogo : jogos) {
+            jogoRepository.save(jogo);
+        }
         return jogos;
     }
 
