@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.Collections;
 
 @Entity
 @Getter
@@ -41,7 +42,7 @@ public class Selecao implements Comparable<Selecao> {
             return -1;
         } if (this.pontos < outraSelecao.getPontos()) {
             return 1;
-        }        
+        }
         return 0;
     }
 }

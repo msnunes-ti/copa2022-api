@@ -60,13 +60,19 @@ public class ChaveService {
     public Chave buscarChave(Long id) {
         Chave chave = chaveRepository.findById(id).orElseThrow(() -> new RuntimeException("Chave não encontrada pelo ID."));
         List<Selecao> selecoes = chave.getSelecoes();
+        selecoes.sort(Comparator.comparing(Selecao::getNomeSelecao));
         Collections.sort(selecoes);
         chave.setSelecoes(selecoes);
         return chave;
     }
 
     public List<Chave> buscarTodasChaves() {
-        return chaveRepository.findAll();
+        List<Chave> chaves = new ArrayList<>();
+        chaves.add(buscarChave(1L));
+        for(int i = 2; i <= chaves.get(0).getQuantidadeGrupos(); i++ ) {
+            chaves.add(buscarChave((long) i));
+        }
+        return chaves;
     }
 
     public void deletarChave(Long id) {
