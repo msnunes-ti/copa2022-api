@@ -35,5 +35,5 @@ public class Jogo {
 
     private Integer golsMandante;
 
-    private Integer golsVisitantes;
+    private Integer golsVisitante;
 }

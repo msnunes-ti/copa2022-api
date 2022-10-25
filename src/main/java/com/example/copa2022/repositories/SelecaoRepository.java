@@ -12,4 +12,5 @@ public interface SelecaoRepository extends JpaRepository<Selecao, Long> {
     Selecao findByRanking (Long posicaoNoRanking);
 
     List<Selecao> findAllByOrderByRankingAsc();
+
 }

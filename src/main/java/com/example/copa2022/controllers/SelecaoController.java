@@ -25,10 +25,12 @@ public class SelecaoController {
     public Selecao buscarPorID(@PathVariable Long id) {
         return selecaoService.buscaPorId(id);
     }
+
     @GetMapping
     public List<Selecao> buscarTodos() {
         return selecaoService.buscaTodos();
     }
+
     @PostMapping
     public @ResponseBody void cadastraSelecao(@RequestBody CadastraSelecaoDTO cadastraSelecaoDTO) {
         selecaoService.cadastraSelecao(cadastraSelecaoDTO);

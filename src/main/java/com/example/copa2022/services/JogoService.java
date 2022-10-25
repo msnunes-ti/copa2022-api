@@ -1,5 +1,6 @@
 package com.example.copa2022.services;
 
+import com.example.copa2022.dtos.InformaResultadoDoJogoDTO;
 import com.example.copa2022.dtos.LancaDataDoJogoDTO;
 import com.example.copa2022.models.Chave;
 import com.example.copa2022.models.Estadio;
@@ -27,6 +28,10 @@ public class JogoService {
 
     public List<Jogo> buscarTodos() {
         return jogoRepository.findAll();
+    }
+
+    public List<Jogo> buscarTodosPorNomeSelecao(String nomeSelecao) {
+        return jogoRepository.findAllByNomeSelecao(nomeSelecao);
     }
 
     public Jogo buscarJogoPeloId(Long id) {
@@ -76,6 +81,26 @@ public class JogoService {
             if (Math.abs(j.getDataHora().until(jogo.getDataHora(), ChronoUnit.HOURS)) < 48) {
                 throw new RuntimeException("Deve haver um espaço de tempo maior que 2 dias entre cada jogo no estádio.");
             }
+        }
+        jogoRepository.save(jogo);
+    }
+
+    public void InformaResultadoDoJogo (Long id, InformaResultadoDoJogoDTO informaResultadoDoJogoDTO) {
+        Jogo jogo = buscarJogoPeloId(id);
+        jogo.setGolsMandante(informaResultadoDoJogoDTO.getGolsMandante());
+        jogo.setGolsVisitante(informaResultadoDoJogoDTO.getGolsVisitante());
+        if (informaResultadoDoJogoDTO.getGolsMandante() < 0 || informaResultadoDoJogoDTO.getGolsVisitante() < 0) {
+            throw new RuntimeException("Não pode existir número de gols menor que zero (0)");
+        }
+        if(informaResultadoDoJogoDTO.getGolsMandante() > informaResultadoDoJogoDTO.getGolsVisitante()) {
+            jogo.getSelecaoMandante().setPontos(jogo.getSelecaoMandante().getPontos() + 3);
+        }
+        if(informaResultadoDoJogoDTO.getGolsMandante() < informaResultadoDoJogoDTO.getGolsVisitante()) {
+            jogo.getSelecaoVisitante().setPontos(jogo.getSelecaoVisitante().getPontos() + 3);
+        }
+        if(Objects.equals(informaResultadoDoJogoDTO.getGolsMandante(), informaResultadoDoJogoDTO.getGolsVisitante())) {
+            jogo.getSelecaoMandante().setPontos(jogo.getSelecaoMandante().getPontos() + 1);
+            jogo.getSelecaoVisitante().setPontos(jogo.getSelecaoVisitante().getPontos() + 1);
         }
         jogoRepository.save(jogo);
     }

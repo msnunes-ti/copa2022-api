@@ -12,5 +12,5 @@ public class InformaResultadoDoJogoDTO {
     private Integer golsMandante;
 
     @NotNull
-    private Integer golsVisitantes;
+    private Integer golsVisitante;
 }
