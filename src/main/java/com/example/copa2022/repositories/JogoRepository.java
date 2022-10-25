@@ -12,5 +12,4 @@ public interface JogoRepository extends JpaRepository<Jogo, Long> {
 
     List<Jogo> findAllByEstadio(Estadio estadio);
 
-    List<Jogo> findAllBySelecao(Selecao selecao);
 }

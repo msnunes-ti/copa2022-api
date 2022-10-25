@@ -36,8 +36,14 @@ public class JogoService {
     public List<Jogo> buscarTodosPorNomeSelecao(String nomeSelecao) {
         List<Jogo> todosOsJogos = jogoRepository.findAll();
         List<Jogo> jogos = new ArrayList<>();
-        
-
+        for (Jogo j : todosOsJogos) {
+            if (j.getSelecaoMandante().getNomeSelecao().equalsIgnoreCase(nomeSelecao)) {
+                jogos.add(j);
+            }
+            if (j.getSelecaoVisitante().getNomeSelecao().equalsIgnoreCase(nomeSelecao)) {
+                jogos.add(j);
+            }
+        }
         return jogos;
     }
 

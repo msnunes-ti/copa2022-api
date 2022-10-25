@@ -26,7 +26,7 @@ public class JogoController {
         return jogoService.buscarJogoPeloId(id);
     }
 
-    @GetMapping
+    @GetMapping(path = "/selecao")
     public List<Jogo> buscarJogosPelaSelecao (@RequestParam(required = false) String nomeSelecao) {
         return jogoService.buscarTodosPorNomeSelecao(nomeSelecao);
     }
