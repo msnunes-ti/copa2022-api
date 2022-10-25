@@ -20,6 +20,11 @@ public class JogoController {
         return jogoService.buscarTodos();
     }
 
+    @GetMapping(path = "/{id}")
+    public Jogo buscarPeloId(@PathVariable Long id) {
+        return jogoService.buscarJogoPeloId(id);
+    }
+
     @PostMapping(path = "/gerar")
     public void gerarJogos() {
         jogoService.gerarJogos();
