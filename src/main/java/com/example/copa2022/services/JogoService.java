@@ -5,9 +5,11 @@ import com.example.copa2022.dtos.LancaDataDoJogoDTO;
 import com.example.copa2022.models.Chave;
 import com.example.copa2022.models.Estadio;
 import com.example.copa2022.models.Jogo;
+import com.example.copa2022.models.Selecao;
 import com.example.copa2022.repositories.ChaveRepository;
 import com.example.copa2022.repositories.EstadioRepository;
 import com.example.copa2022.repositories.JogoRepository;
+import com.example.copa2022.repositories.SelecaoRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -26,12 +28,17 @@ public class JogoService {
     @Autowired
     EstadioRepository estadioRepository;
 
+
     public List<Jogo> buscarTodos() {
         return jogoRepository.findAll();
     }
 
     public List<Jogo> buscarTodosPorNomeSelecao(String nomeSelecao) {
-        return jogoRepository.findAllByNomeSelecao(nomeSelecao);
+        List<Jogo> todosOsJogos = jogoRepository.findAll();
+        List<Jogo> jogos = new ArrayList<>();
+        
+
+        return jogos;
     }
 
     public Jogo buscarJogoPeloId(Long id) {
