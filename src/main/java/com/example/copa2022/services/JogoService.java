@@ -12,9 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.temporal.ChronoUnit;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 @Service
 @AllArgsConstructor
@@ -26,6 +24,10 @@ public class JogoService {
     ChaveRepository chaveRepository;
     @Autowired
     EstadioRepository estadioRepository;
+
+    public List<Jogo> buscarTodos() {
+        return jogoRepository.findAll();
+    }
 
     public Jogo buscarJogoPeloId(Long id) {
         return jogoRepository.findById(id).orElseThrow(() -> new RuntimeException("Jogo não encontrado pelo ID."));
@@ -63,26 +65,19 @@ public class JogoService {
         return jogos;
     }
 
-    public long lancarDataDoJogo(Long jogoId, LancaDataDoJogoDTO dataHoraJogo) {
+    public void lancarDataDoJogo(Long jogoId, LancaDataDoJogoDTO dataHoraJogo) {
         Jogo jogo = buscarJogoPeloId(jogoId);
         jogo.setDataHora(dataHoraJogo.getDataHoraJogo());
         List<Jogo> jogosNoEstadio = buscarPeloEstadio(jogo.getEstadio());
         jogosNoEstadio.remove(jogo);
-
-        for (Jogo j: jogosNoEstadio) {
-            if (j.getDataHora() == null) {
-                jogosNoEstadio.remove(j);
-            }
-        }
+        jogosNoEstadio.removeIf(j -> j.getDataHora() == null);
 
         for (Jogo j : jogosNoEstadio) {
-            if (jogo.getDataHora().until(j.getDataHora(), ChronoUnit.HOURS) < 48) {
-                return jogo.getDataHora().until(j.getDataHora(), ChronoUnit.HOURS);
-//                throw new RuntimeException("Deve haver um espaço de tempo maior que 2 dias entre cada jogo no estádio.");
+            if (Math.abs(j.getDataHora().until(jogo.getDataHora(), ChronoUnit.HOURS)) < 48) {
+                throw new RuntimeException("Deve haver um espaço de tempo maior que 2 dias entre cada jogo no estádio.");
             }
         }
         jogoRepository.save(jogo);
-        return 0;
     }
 
 }
