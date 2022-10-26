@@ -62,7 +62,6 @@ public class JogoService {
         List<Integer> sequenciaMandantes = Arrays.asList(0, 2, 3, 1, 2, 1);
         List<Integer> sequenciaVisitantes = Arrays.asList(1, 3, 0, 2, 0, 3);
         List<Jogo> jogos = new ArrayList<>();
-
         for (Chave c : chaves) {
             for (int j = 0; j < sequenciaMandantes.size(); j++) {
                 Jogo jogo = new Jogo();
