@@ -2,6 +2,7 @@ package com.example.copa2022.services;
 
 import com.example.copa2022.dtos.AtualizaEstadioDTO;
 import com.example.copa2022.dtos.CadastraEstadioDTO;
+import com.example.copa2022.dtos.EstadioDTO;
 import com.example.copa2022.mappers.EstadioMapper;
 import com.example.copa2022.models.Estadio;
 import com.example.copa2022.repositories.EstadioRepository;
@@ -20,12 +21,12 @@ public class EstadioService {
     @Autowired
     EstadioRepository estadioRepository;
 
-    public List<Estadio> findAll() {
-        return estadioRepository.findAll();
+    public List<EstadioDTO> findAll() {
+        return EstadioMapper.ToEstadioDtoList(estadioRepository.findAll());
     }
 
-    public Estadio buscaPorId(Long id) {
-        return estadioRepository.findById(id).orElseThrow(() -> new RuntimeException("Estádio não encontrado pelo ID"));
+    public EstadioDTO buscaPorId(Long id) {
+        return EstadioMapper.toEstadioDTO(estadioRepository.findById(id).orElseThrow(() -> new RuntimeException("Estádio não encontrado pelo ID")));
     }
 
     @Transactional
@@ -45,8 +46,9 @@ public class EstadioService {
         estadioRepository.save(estadio);
     }
 
+    @Transactional
     public void deletaEstadio(Long id) {
-        Estadio estadio = buscaPorId(id);
+        Estadio estadio = EstadioMapper.toEstadio(buscaPorId(id));
         estadioRepository.delete(estadio);
     }
 
