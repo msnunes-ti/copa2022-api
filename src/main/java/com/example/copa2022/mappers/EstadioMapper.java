@@ -26,9 +26,9 @@ public class EstadioMapper {
         estadioDTO.setCapacidade(estadio.getCapacidade());
         return estadioDTO;
     }
-    public static List<EstadioDTO> ToEstadioDtoList(List<Estadio> estadios){
+    public static List<EstadioDTO> ToEstadioDtoList(List<Estadio> estadioList){
         List<EstadioDTO> estadiosDTO = new ArrayList<>();
-        for (Estadio e : estadios) {
+        for (Estadio e : estadioList) {
             EstadioDTO estadioDTO = new EstadioDTO();
             estadioDTO.setId(e.getId());
             estadioDTO.setNomeEstadio(e.getNomeEstadio());
