@@ -7,11 +7,9 @@ import com.example.copa2022.mappers.JogoMapper;
 import com.example.copa2022.models.Chave;
 import com.example.copa2022.models.Estadio;
 import com.example.copa2022.models.Jogo;
-import com.example.copa2022.models.Selecao;
 import com.example.copa2022.repositories.ChaveRepository;
 import com.example.copa2022.repositories.EstadioRepository;
 import com.example.copa2022.repositories.JogoRepository;
-import com.example.copa2022.repositories.SelecaoRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -49,8 +47,11 @@ public class JogoService {
         return JogoMapper.toJogoDTOList(jogos);
     }
 
-    public JogoDTo buscarJogoPeloId(Long id) {
-        return JogoMapper.jogoRepository.findById(id).orElseThrow(() -> new RuntimeException("Jogo não encontrado pelo ID."));
+    public JogoDTO buscarJogoDTOPeloId(Long id) {
+        return JogoMapper.toJogoDTO(jogoRepository.findById(id).orElseThrow(() -> new RuntimeException("Jogo não encontrado pelo ID.")));
+    }
+    private Jogo buscaJogoPeloId(Long id) {
+        return JogoMapper.toJogo(buscarJogoDTOPeloId(id));
     }
 
     public List<Jogo> buscarPeloEstadio(Estadio estadio) {
@@ -85,7 +86,7 @@ public class JogoService {
     }
 
     public void lancarDataDoJogo(Long jogoId, LancaDataDoJogoDTO dataHoraJogo) {
-        Jogo jogo = buscarJogoPeloId(jogoId);
+        Jogo jogo = buscaJogoPeloId(jogoId);
         jogo.setDataHora(dataHoraJogo.getDataHoraJogo());
         List<Jogo> jogosNoEstadio = buscarPeloEstadio(jogo.getEstadio());
         jogosNoEstadio.remove(jogo);
@@ -100,7 +101,7 @@ public class JogoService {
     }
 
     public void InformaResultadoDoJogo (Long id, InformaResultadoDoJogoDTO informaResultadoDoJogoDTO) {
-        Jogo jogo = buscarJogoPeloId(id);
+        Jogo jogo = buscaJogoPeloId(id);
         jogo.setGolsMandante(informaResultadoDoJogoDTO.getGolsMandante());
         jogo.setGolsVisitante(informaResultadoDoJogoDTO.getGolsVisitante());
         if (informaResultadoDoJogoDTO.getGolsMandante() < 0 || informaResultadoDoJogoDTO.getGolsVisitante() < 0) {

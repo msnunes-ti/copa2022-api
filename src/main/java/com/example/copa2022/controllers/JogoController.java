@@ -3,7 +3,6 @@ package com.example.copa2022.controllers;
 import com.example.copa2022.dtos.InformaResultadoDoJogoDTO;
 import com.example.copa2022.dtos.JogoDTO;
 import com.example.copa2022.dtos.LancaDataDoJogoDTO;
-import com.example.copa2022.models.Jogo;
 import com.example.copa2022.services.JogoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -24,7 +23,7 @@ public class JogoController {
 
     @GetMapping(path = "/{id}")
     public JogoDTO buscarPeloId(@PathVariable Long id) {
-        return jogoService.buscarJogoPeloId(id);
+        return jogoService.buscarJogoDTOPeloId(id);
     }
 
     @GetMapping(path = "/selecao")
