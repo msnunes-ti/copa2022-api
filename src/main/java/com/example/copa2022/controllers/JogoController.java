@@ -1,6 +1,7 @@
 package com.example.copa2022.controllers;
 
 import com.example.copa2022.dtos.InformaResultadoDoJogoDTO;
+import com.example.copa2022.dtos.JogoDTO;
 import com.example.copa2022.dtos.LancaDataDoJogoDTO;
 import com.example.copa2022.models.Jogo;
 import com.example.copa2022.services.JogoService;
@@ -17,22 +18,23 @@ public class JogoController {
     JogoService jogoService;
 
     @GetMapping
-    public List<Jogo> jogos() {
+    public List<JogoDTO> jogos() {
         return jogoService.buscarTodos();
     }
 
     @GetMapping(path = "/{id}")
-    public Jogo buscarPeloId(@PathVariable Long id) {
+    public JogoDTO buscarPeloId(@PathVariable Long id) {
         return jogoService.buscarJogoPeloId(id);
     }
 
     @GetMapping(path = "/selecao")
-    public List<Jogo> buscarJogosPelaSelecao (@RequestParam(required = false) String nomeSelecao) {
+    public List<JogoDTO> buscarJogosPelaSelecao (@RequestParam(required = false) String nomeSelecao) {
         return jogoService.buscarTodosPorNomeSelecao(nomeSelecao);
     }
 
     @PostMapping(path = "/gerar")
     public void gerarJogos() {
+
         jogoService.gerarJogos();
     }
 

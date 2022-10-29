@@ -1,7 +1,9 @@
 package com.example.copa2022.services;
 
 import com.example.copa2022.dtos.InformaResultadoDoJogoDTO;
+import com.example.copa2022.dtos.JogoDTO;
 import com.example.copa2022.dtos.LancaDataDoJogoDTO;
+import com.example.copa2022.mappers.JogoMapper;
 import com.example.copa2022.models.Chave;
 import com.example.copa2022.models.Estadio;
 import com.example.copa2022.models.Jogo;
@@ -29,11 +31,11 @@ public class JogoService {
     EstadioRepository estadioRepository;
 
 
-    public List<Jogo> buscarTodos() {
-        return jogoRepository.findAll();
+    public List<JogoDTO> buscarTodos() {
+        return JogoMapper.toJogoDTOList(jogoRepository.findAll());
     }
 
-    public List<Jogo> buscarTodosPorNomeSelecao(String nomeSelecao) {
+    public List<JogoDTO> buscarTodosPorNomeSelecao(String nomeSelecao) {
         List<Jogo> todosOsJogos = jogoRepository.findAll();
         List<Jogo> jogos = new ArrayList<>();
         for (Jogo j : todosOsJogos) {
@@ -44,11 +46,11 @@ public class JogoService {
                 jogos.add(j);
             }
         }
-        return jogos;
+        return JogoMapper.toJogoDTOList(jogos);
     }
 
-    public Jogo buscarJogoPeloId(Long id) {
-        return jogoRepository.findById(id).orElseThrow(() -> new RuntimeException("Jogo não encontrado pelo ID."));
+    public JogoDTo buscarJogoPeloId(Long id) {
+        return JogoMapper.jogoRepository.findById(id).orElseThrow(() -> new RuntimeException("Jogo não encontrado pelo ID."));
     }
 
     public List<Jogo> buscarPeloEstadio(Estadio estadio) {
