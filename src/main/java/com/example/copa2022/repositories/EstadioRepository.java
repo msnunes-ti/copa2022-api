@@ -8,5 +8,4 @@ import org.springframework.stereotype.Repository;
 public interface EstadioRepository extends JpaRepository<Estadio, Long> {
 
     Long countByNomeEstadio(String nome);
-
 }

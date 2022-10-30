@@ -11,5 +11,4 @@ import java.util.List;
 public interface JogoRepository extends JpaRepository<Jogo, Long> {
 
     List<Jogo> findAllByEstadio(Estadio estadio);
-
 }
