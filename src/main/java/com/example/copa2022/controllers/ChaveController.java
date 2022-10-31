@@ -1,5 +1,6 @@
 package com.example.copa2022.controllers;
 
+import com.example.copa2022.dtos.ChaveDTO;
 import com.example.copa2022.models.Chave;
 import com.example.copa2022.services.ChaveService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +16,7 @@ public class ChaveController {
     ChaveService chaveService;
 
     @GetMapping
-    public List<Chave> buscarTodasChaves() {
+    public List<ChaveDTO> buscarTodasChaves() {
         return chaveService.buscarTodasChaves();
     }
 

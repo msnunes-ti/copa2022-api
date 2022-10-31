@@ -1,5 +1,7 @@
 package com.example.copa2022.services;
 
+import com.example.copa2022.dtos.ChaveDTO;
+import com.example.copa2022.mappers.ChaveMapper;
 import com.example.copa2022.models.Chave;
 import com.example.copa2022.models.Selecao;
 import com.example.copa2022.repositories.ChaveRepository;
@@ -66,13 +68,8 @@ public class ChaveService {
         return chave;
     }
 
-    public List<Chave> buscarTodasChaves() {
-        List<Chave> chaves = new ArrayList<>();
-        chaves.add(buscarChave(1L));
-        for(int i = 2; i <= chaves.get(0).getQuantidadeGrupos(); i++ ) {
-            chaves.add(buscarChave((long) i));
-        }
-        return chaves;
+    public List<ChaveDTO> buscarTodasChaves() {
+        return ChaveMapper.toChaveDTOList(chaveRepository.findAll());
     }
 
     public void deletarChave(Long id) {
