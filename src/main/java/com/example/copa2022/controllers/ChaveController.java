@@ -17,12 +17,12 @@ public class ChaveController {
 
     @GetMapping
     public List<ChaveDTO> buscarTodasChaves() {
-        return chaveService.buscarTodasChaves();
+        return chaveService.buscarTodasChavesOrdenadas();
     }
 
     @GetMapping(path = "/{id}")
     public ChaveDTO buscarChave(@PathVariable Long id) {
-        return chaveService.buscarChave(id);
+        return chaveService.buscarChaveOrdenada(id);
     }
 
     @PostMapping

@@ -13,6 +13,7 @@ import com.example.copa2022.repositories.JogoRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.temporal.ChronoUnit;
 import java.util.*;
@@ -58,6 +59,7 @@ public class JogoService {
         return jogoRepository.findAllByEstadio(estadio);
     }
 
+    @Transactional
     public List<Jogo> gerarJogos() {
         List<Estadio> estadios = estadioRepository.findAll();
         int contadorEstadios = 0;
@@ -84,7 +86,7 @@ public class JogoService {
         }
         return jogos;
     }
-
+    @Transactional
     public void lancarDataDoJogo(Long jogoId, LancaDataDoJogoDTO dataHoraJogo) {
         Jogo jogo = buscaJogoPeloId(jogoId);
         jogo.setDataHora(dataHoraJogo.getDataHoraJogo());
@@ -99,11 +101,14 @@ public class JogoService {
         }
         jogoRepository.save(jogo);
     }
-
+    @Transactional
     public void InformaResultadoDoJogo (Long id, InformaResultadoDoJogoDTO informaResultadoDoJogoDTO) {
         Jogo jogo = buscaJogoPeloId(id);
         jogo.setGolsMandante(informaResultadoDoJogoDTO.getGolsMandante());
         jogo.setGolsVisitante(informaResultadoDoJogoDTO.getGolsVisitante());
+        if (informaResultadoDoJogoDTO.getGolsMandante() == null || informaResultadoDoJogoDTO.getGolsVisitante() == null) {
+            throw new RuntimeException("Não pode existir o campo: gols == null");
+        }
         if (informaResultadoDoJogoDTO.getGolsMandante() < 0 || informaResultadoDoJogoDTO.getGolsVisitante() < 0) {
             throw new RuntimeException("Não pode existir número de gols menor que zero (0)");
         }

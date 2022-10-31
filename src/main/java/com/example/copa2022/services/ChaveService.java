@@ -59,17 +59,26 @@ public class ChaveService {
         return chaves;
     }
 
-    public ChaveDTO buscarChave(Long id) {
-        Chave chave = chaveRepository.findById(id).orElseThrow(() -> new RuntimeException("Chave não encontrada pelo ID."));
+    private static Chave ordenarChave(Chave chave) {
         List<Selecao> selecoes = chave.getSelecoes();
         selecoes.sort(Comparator.comparing(Selecao::getNomeSelecao));
         Collections.sort(selecoes);
         chave.setSelecoes(selecoes);
+        return chave;
+    }
+
+    public ChaveDTO buscarChaveOrdenada(Long id) {
+        Chave chave = chaveRepository.findById(id).orElseThrow(() -> new RuntimeException("Chave não encontrada pelo ID."));
+        ChaveService.ordenarChave(chave);
         return ChaveMapper.toChaveDTO(chave);
     }
 
-    public List<ChaveDTO> buscarTodasChaves() {
-        return ChaveMapper.toChaveDTOList(chaveRepository.findAll());
+    public List<ChaveDTO> buscarTodasChavesOrdenadas() {
+        List<Chave> chaveList = chaveRepository.findAll();
+        for (Chave c : chaveList) {
+            ChaveService.ordenarChave(c);
+        }
+        return ChaveMapper.toChaveDTOList(chaveList);
     }
 
     public void deletarChave(Long id) {
