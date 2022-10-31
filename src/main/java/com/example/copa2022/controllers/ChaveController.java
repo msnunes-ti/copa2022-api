@@ -21,7 +21,7 @@ public class ChaveController {
     }
 
     @GetMapping(path = "/{id}")
-    public Chave buscarChave(@PathVariable Long id) {
+    public ChaveDTO buscarChave(@PathVariable Long id) {
         return chaveService.buscarChave(id);
     }
 

@@ -59,13 +59,13 @@ public class ChaveService {
         return chaves;
     }
 
-    public Chave buscarChave(Long id) {
+    public ChaveDTO buscarChave(Long id) {
         Chave chave = chaveRepository.findById(id).orElseThrow(() -> new RuntimeException("Chave não encontrada pelo ID."));
         List<Selecao> selecoes = chave.getSelecoes();
         selecoes.sort(Comparator.comparing(Selecao::getNomeSelecao));
         Collections.sort(selecoes);
         chave.setSelecoes(selecoes);
-        return chave;
+        return ChaveMapper.toChaveDTO(chave);
     }
 
     public List<ChaveDTO> buscarTodasChaves() {
@@ -73,7 +73,7 @@ public class ChaveService {
     }
 
     public void deletarChave(Long id) {
-        Chave chave = buscarChave(id);
+        Chave chave = chaveRepository.findById(id).orElseThrow(() -> new RuntimeException("Chave não encontrada pelo ID."));
         chaveRepository.delete(chave);
     }
 }

@@ -20,4 +20,13 @@ public class ChaveMapper {
           }
           return chaveDTOList;
       }
+
+      public static ChaveDTO toChaveDTO(Chave chave) {
+          ChaveDTO chaveDTO = new ChaveDTO();
+          chaveDTO.setId(chave.getId());
+          chaveDTO.setGrupo(chave.getGrupo());
+          chaveDTO.setSelecoes(chave.getSelecoes());
+          chaveDTO.setQuantidadeGrupos(chave.getQuantidadeGrupos());
+          return chaveDTO;
+      }
 }
